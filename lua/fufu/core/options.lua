@@ -41,3 +41,9 @@ opt.splitbelow = true -- split horizontal window to the bottom
 
 -- turn off swapfile
 opt.swapfile = false
+
+-- identify non-ASCII characters and highlight them
+vim.cmd([[
+  syntax match NonASCII "[^\x00-\x7F]"
+  highlight NonASCII ctermfg=white ctermbg=red guifg=#ffffff guibg=#ff0000
+]])
