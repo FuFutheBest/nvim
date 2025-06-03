@@ -183,5 +183,7 @@ return {
       filetypes = { "java" },
       root_dir = require("lspconfig.util").root_pattern("pom.xml", "gradle.build"),
     })
+
+    -- require("mason").setup()
   end,
 }
