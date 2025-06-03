@@ -93,6 +93,18 @@ return {
       --   elmPath = "elm",
       --   elmTestPath = "elm-test",
       -- },
+      handlers = {
+        ["window/showMessageRequest"] = function(whatever, result)
+          -- For some reason, the showMessageRequest handler doesn't work with
+          -- the format failed error. It just hangs on the screen and can't
+          -- interact with the vim.ui.select thingy. So skip it.
+          if result.message:find("Running elm-format failed", 1, true) then
+            print(result.message)
+            return vim.NIL
+          end
+          return vim.lsp.handlers["window/showMessageRequest"](whatever, result)
+        end,
+      },
       root_dir = lspconfig.util.root_pattern("elm.json", "elm-package.json"),
       cmd = { "/home/fufu/.local/share/nvim/mason/bin/elm-language-server" },
     })
