@@ -70,14 +70,6 @@ return {
     -- used to enable autocompletion (assign to every lsp server config)
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
-    -- Change the Diagnostic symbols in the sign column (gutter)
-    -- (not in youtube nvim video)
-    -- local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-    -- for type, icon in pairs(signs) do
-    --   local hl = "DiagnosticSign" .. type
-    --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-    -- end
-
     vim.diagnostic.config({
       signs = {
         text = {
@@ -105,113 +97,6 @@ return {
       cmd = { "/home/fufu/.local/share/nvim/mason/bin/elm-language-server" },
     })
 
-    --   mason_lspconfig.setup_handlers({
-    --     -- default handler for installed servers
-    --     function(server_name)
-    --       lspconfig[server_name].setup({
-    --         capabilities = capabilities,
-    --       })
-    --     end,
-    --     ["svelte"] = function()
-    --       -- configure svelte server
-    --       lspconfig["svelte"].setup({
-    --         capabilities = capabilities,
-    --         on_attach = function(client, bufnr)
-    --           vim.api.nvim_create_autocmd("BufWritePost", {
-    --             pattern = { "*.js", "*.ts" },
-    --             callback = function(ctx)
-    --               -- Here use ctx.match instead of ctx.file
-    --               client.notify("$/onDidChangeTsOrJsFile", { uri = ctx.match })
-    --             end,
-    --           })
-    --         end,
-    --       })
-    --     end,
-    --     ["graphql"] = function()
-    --       -- configure graphql language server
-    --       lspconfig["graphql"].setup({
-    --         capabilities = capabilities,
-    --         filetypes = { "graphql", "gql", "svelte", "typescriptreact", "javascriptreact" },
-    --       })
-    --     end,
-    --     ["emmet_ls"] = function()
-    --       -- configure emmet language server
-    --       lspconfig["emmet_ls"].setup({
-    --         capabilities = capabilities,
-    --         filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
-    --       })
-    --     end,
-    --     ["lua_ls"] = function()
-    --       -- configure lua server (with special settings)
-    --       lspconfig["lua_ls"].setup({
-    --         capabilities = capabilities,
-    --         settings = {
-    --           Lua = {
-    --             -- make the language server recognize "vim" global
-    --             diagnostics = {
-    --               globals = { "vim" },
-    --             },
-    --             completion = {
-    --               callSnippet = "Replace",
-    --             },
-    --           },
-    --         },
-    --       })
-    --     end,
-    --     ["harper_ls"] = function()
-    --       -- configure harper language server
-    --       lspconfig.harper_ls.setup({
-    --         settings = {
-    --           ["harper-ls"] = {
-    --             -- Markdown-specific configuration
-    --             markdown = {
-    --               ignore_link_title = true, -- Ignore link titles by default
-    --             },
-    --
-    --             -- Linters configuration
-    --             linters = {
-    --               spell_check = true, -- Enable spell check
-    --               spelled_numbers = false, -- Disable spelled numbers check
-    --               an_a = true, -- Enable "an" vs "a" check
-    --               sentence_capitalization = false, -- Enable sentence capitalization check
-    --               unclosed_quotes = true, -- Enable unclosed quotes check
-    --               wrong_quotes = false, -- Disable wrong quotes check
-    --               long_sentences = true, -- Enable long sentences check
-    --               repeated_words = true, -- Enable repeated words check
-    --               spaces = true, -- Enable spaces check
-    --               matcher = true, -- Enable matcher check
-    --               correct_number_suffix = true, -- Enable number suffix check
-    --               number_suffix_capitalization = false, -- Enable number suffix capitalization check
-    --               multiple_sequential_pronouns = false, -- Enable multiple sequential pronouns check
-    --               linking_verbs = false, -- Disable linking verbs check
-    --               avoid_curses = true, -- Enable avoid curses check
-    --               terminating_conjunctions = true, -- Enable terminating conjunctions check
-    --             },
-    --
-    --             -- Diagnostic severity configuration
-    --             diagnosticSeverity = "hint", -- Set diagnostic severity to "warning"
-    --
-    --             -- Code actions configuration
-    --             codeActions = {
-    --               forceStable = true, -- Make code actions appear in stable positions
-    --             },
-    --
-    --             -- English isolation configuration (optional)
-    --             isolateEnglish = true, -- Set to true if you want to isolate English text for linting
-    --           },
-    --         },
-    --       })
-    --     end,
-    --     ["jdtls"] = function()
-    --       -- configure java language server
-    --       lspconfig.jdtls.setup({
-    --         capabilities = capabilities,
-    --         filetypes = { "java" },
-    --         root_dir = lspconfig.util.root_pattern("pom.xml", "gradle.build"),
-    --       })
-    --     end,
-    --   })
-    --
     vim.lsp.config("svelte", {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
