@@ -87,12 +87,12 @@ return {
 
     lspconfig.elmls.setup({
       capabilities = capabilities,
-      -- init_options = {
-      --   elmAnalyseTrigger = "change",
-      --   elmFormatPath = "elm-format",
-      --   elmPath = "elm",
-      --   elmTestPath = "elm-test",
-      -- },
+      init_options = {
+        elmAnalyseTrigger = "change",
+        elmFormatPath = "elm-format",
+        elmPath = "elm",
+        elmTestPath = "elm-test",
+      },
       handlers = {
         ["window/showMessageRequest"] = function(whatever, result)
           -- For some reason, the showMessageRequest handler doesn't work with
