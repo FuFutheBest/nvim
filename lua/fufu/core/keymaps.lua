@@ -39,3 +39,5 @@ keymap.set(
 )
 keymap.set("t", "<leader>tn", "<C-\\><C-n>", { desc = "Switch terminal mode to normal mode" })
 keymap.set("t", "<leader>tx", "<C-\\><C-n>:q<CR>", { desc = "Close terminal in terminal mode" })
+
+keymap.set("v", "q", "<Esc>", { silent = true }) -- exit visual mode with q
