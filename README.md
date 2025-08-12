@@ -52,4 +52,3 @@ $HOME/.config/nvim
 
 - [Overall setup](https://www.josean.com/posts/how-to-setup-neovim-2024)
 - [Chinese guide](https://github.com/archibate/vimrc)
-- [Terminal font (JetBrainsMonoNL Nerd Font)](https://github.com/ryanoasis/nerd-fonts)
