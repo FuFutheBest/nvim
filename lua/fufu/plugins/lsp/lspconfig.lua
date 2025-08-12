@@ -10,9 +10,6 @@ return {
     -- import lspconfig plugin
     local lspconfig = require("lspconfig")
 
-    -- import mason_lspconfig plugin
-    local mason_lspconfig = require("mason-lspconfig")
-
     -- import cmp-nvim-lsp plugin
     local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
@@ -64,6 +61,12 @@ return {
 
         opts.desc = "Restart LSP"
         keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
+
+        opts.desc = "Toggle inlay hints"
+        keymap.set("n", "<leader>dh", ":LspInlayHintToggle<CR>", opts) -- toggle inlay hints
+
+        opts.desc = "Toggle diagnostics"
+        keymap.set("n", "<leader>dd", ":LspDiagnosticsToggle<CR>", opts) -- toggle diagnostics
       end,
     })
 
@@ -73,10 +76,16 @@ return {
     vim.diagnostic.config({
       signs = {
         text = {
-          [vim.diagnostic.severity.ERROR] = " ",
-          [vim.diagnostic.severity.WARN] = " ",
-          [vim.diagnostic.severity.HINT] = "󰠠 ",
-          [vim.diagnostic.severity.INFO] = " ",
+          [vim.diagnostic.severity.ERROR] = "",
+          [vim.diagnostic.severity.WARN] = "",
+          [vim.diagnostic.severity.INFO] = "",
+          [vim.diagnostic.severity.HINT] = "",
+        },
+        texthl = {
+          [vim.diagnostic.severity.ERROR] = "DiagnosticSignError",
+          [vim.diagnostic.severity.WARN] = "DiagnosticSignWarn",
+          [vim.diagnostic.severity.INFO] = "DiagnosticSignInfo",
+          [vim.diagnostic.severity.HINT] = "DiagnosticSignHint",
         },
       },
       virtual_text = false,
@@ -85,14 +94,23 @@ return {
       severity_sort = true,
     })
 
-    lspconfig.elmls.setup({
+    -- Lua LSP Configuration
+    vim.lsp.config("lua_ls", {
       capabilities = capabilities,
-      init_options = {
-        elmAnalyseTrigger = "change",
-        elmFormatPath = "elm-format",
-        elmPath = "elm",
-        elmTestPath = "elm-test",
+      settings = {
+        Lua = {
+          diagnostics = {
+            globals = { "vim" },
+          },
+          completion = {
+            callSnippet = "Replace",
+          },
+        },
       },
+    })
+
+    -- Elm LSP Configuration
+    vim.lsp.config("elmls", {
       handlers = {
         ["window/showMessageRequest"] = function(whatever, result)
           -- For some reason, the showMessageRequest handler doesn't work with
@@ -105,10 +123,9 @@ return {
           return vim.lsp.handlers["window/showMessageRequest"](whatever, result)
         end,
       },
-      root_dir = lspconfig.util.root_pattern("elm.json", "elm-package.json"),
-      cmd = { "/home/fufu/.local/share/nvim/mason/bin/elm-language-server" },
     })
 
+    -- Web development related LSPs
     vim.lsp.config("svelte", {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
@@ -130,60 +147,5 @@ return {
       capabilities = capabilities,
       filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
     })
-
-    vim.lsp.config("lua_ls", {
-      capabilities = capabilities,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
-          completion = {
-            callSnippet = "Replace",
-          },
-        },
-      },
-    })
-
-    vim.lsp.config("harper_ls", {
-      settings = {
-        ["harper-ls"] = {
-          markdown = {
-            ignore_link_title = true,
-          },
-          linters = {
-            spell_check = true,
-            spelled_numbers = false,
-            an_a = true,
-            sentence_capitalization = false,
-            unclosed_quotes = true,
-            wrong_quotes = false,
-            long_sentences = true,
-            repeated_words = true,
-            spaces = true,
-            matcher = true,
-            correct_number_suffix = true,
-            number_suffix_capitalization = false,
-            multiple_sequential_pronouns = false,
-            linking_verbs = false,
-            avoid_curses = true,
-            terminating_conjunctions = true,
-          },
-          diagnosticSeverity = "hint",
-          codeActions = {
-            forceStable = true,
-          },
-          isolateEnglish = true,
-        },
-      },
-    })
-
-    vim.lsp.config("jdtls", {
-      capabilities = capabilities,
-      filetypes = { "java" },
-      root_dir = require("lspconfig.util").root_pattern("pom.xml", "gradle.build"),
-    })
-
-    -- require("mason").setup()
   end,
 }

@@ -12,6 +12,7 @@ return {
     local mason_lspconfig = require("mason-lspconfig")
 
     local mason_tool_installer = require("mason-tool-installer")
+
     -- enable mason and configure icons
     mason.setup({
       ui = {
@@ -29,31 +30,72 @@ return {
 
       -- list of servers for mason to install
       ensure_installed = {
-        "html",
-        "cssls",
-        "tailwindcss",
+        -- Web development related
+        "html", -- HTML
+        "cssls", -- CSS
+        "tailwindcss", -- CSS
         "svelte",
+        "emmet_ls", -- Emmet
+        "prismals", -- JavaScript and TypeScript
+
+        -- Lua for Neovim
         "lua_ls",
-        "graphql",
+
+        -- Elm
         "elmls",
-        "emmet_ls",
-        "prismals",
+
+        -- Python
         "pyright",
-        "ast_grep",
+
+        -- C/C++
         "clangd",
-        "harper_ls",
+
+        -- Markdown
+        "marksman",
+
+        -- Default
+        "graphql",
+        "ast_grep",
       },
     })
 
     mason_tool_installer.setup({
       ensure_installed = {
-        "prettier", -- prettier formatter
-        "stylua", -- lua formatter
-        "isort", -- python formatter
-        "black", -- python formatter
+        -- Python formatter
+        "prettier",
+        "black",
+
+        -- Lua formatter
+        "stylua",
+
+        -- Python linter
         "pylint",
+
+        -- JavaScript/TypeScript linter
         "eslint_d",
       },
     })
+
+    vim.api.nvim_create_user_command("LspInstallRoot", function()
+      for _, client in pairs(vim.lsp.get_clients({ bufnr = 0 })) do
+        print(client.name .. ": " .. vim.fn.exepath(client.config.cmd[1]))
+      end
+    end, {})
+
+    vim.api.nvim_create_user_command("LspInlayHintToggle", function()
+      if vim.lsp.inlay_hint.is_enabled() then
+        vim.lsp.inlay_hint.enable(false)
+      else
+        vim.lsp.inlay_hint.enable(true)
+      end
+    end, { desc = "Toggle inlay hints" })
+
+    vim.api.nvim_create_user_command("LspDiagnosticsToggle", function()
+      if vim.diagnostic.is_enabled() then
+        vim.diagnostic.enable(false)
+      else
+        vim.diagnostic.enable(true)
+      end
+    end, { desc = "Toggle diagnostics" })
   end,
 }
