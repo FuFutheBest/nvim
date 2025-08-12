@@ -61,12 +61,18 @@ return {
 
     mason_tool_installer.setup({
       ensure_installed = {
-        -- Python formatter
+        -- Default formatter
         "prettier",
+
+        -- Python formatter
         "black",
+        "isort",
 
         -- Lua formatter
         "stylua",
+
+        -- C/C++ formatter
+        "clang-format",
 
         -- Python linter
         "pylint",

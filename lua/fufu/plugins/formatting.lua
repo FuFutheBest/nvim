@@ -3,6 +3,7 @@ return {
   event = { "BufReadPre", "BufNewFile" },
   config = function()
     local conform = require("conform")
+    local home = os.getenv("HOME")
 
     conform.setup({
       formatters_by_ft = {
@@ -19,9 +20,18 @@ return {
         graphql = { "prettier" },
         liquid = { "prettier" },
         lua = { "stylua" },
-        python = { "isort", "black" },
-        java = { "google-java-format" },
         elm = { "elm-format" },
+        python = { "isort", "black" },
+        c = { "clang-format" },
+        cpp = { "clang-format" },
+      },
+      formatters = {
+        ["clang-format"] = {
+          command = "clang-format",
+          args = {
+            "--style=file:" .. home .. "/.config/nvim/dotfiles/.clang-format",
+          },
+        },
       },
       format_on_save = {
         lsp_fallback = true,
@@ -37,16 +47,5 @@ return {
         timeout_ms = 1000,
       })
     end, { desc = "Format file or range (in visual mode)" })
-
-    -- -- auto create a new line if the last line is not empty
-    -- vim.api.nvim_create_autocmd("BufWritePost", {
-    --   pattern = "*",
-    --   callback = function()
-    --     local last_line = vim.api.nvim_buf_get_lines(0, -2, -1, false)[1]
-    --     if last_line ~= "" then
-    --       vim.api.nvim_buf_set_lines(0, -1, -1, false, { "" })
-    --     end
-    --   end,
-    -- })
   end,
 }
