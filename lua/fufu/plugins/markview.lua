@@ -1,7 +1,7 @@
 return {
   "OXY2DEV/markview.nvim",
-  dependencies = { "nvim-treesitter/nvim-treesitter" }, -- make sure to load treesitter before markview
-  lazy = true,
+  lazy = false,
+  priority = 49,
 
   -- For blink.cmp's completion
   -- source
