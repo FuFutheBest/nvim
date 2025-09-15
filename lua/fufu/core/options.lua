@@ -47,3 +47,19 @@ vim.cmd([[
   syntax match NonASCII "[^\x00-\x7F]"
   highlight NonASCII ctermfg=white ctermbg=red guifg=#ffffff guibg=#ff0000
 ]])
+
+-- Silence the specific position encoding message
+local notify_original = vim.notify
+vim.notify = function(msg, ...)
+  if
+    msg
+    and (
+      msg:match("position_encoding param is required")
+      or msg:match("Defaulting to position encoding of the first client")
+      or msg:match("multiple different client offset_encodings")
+    )
+  then
+    return
+  end
+  return notify_original(msg, ...)
+end
