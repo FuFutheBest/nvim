@@ -2,10 +2,16 @@
 
 My personal daily-use Neovim setup
 
+## Dependencies
+
+- Node, Ripgrep
+- Kitty, ImageMagic(for image.nvim)
+
 ## Structure
 
 ```bash
 $HOME/.config/nvim
+                ├── dotfiles
                 ├── init.lua
                 ├── lazy-lock.json
                 ├── lua
@@ -26,6 +32,7 @@ $HOME/.config/nvim
                 │           ├── dressing.lua
                 │           ├── formatting.lua
                 │           ├── gitsigns.lua
+                │           ├── image-viewer.lua
                 │           ├── indent-blankline.lua
                 │           ├── init.lua
                 │           ├── lazygit.lua
