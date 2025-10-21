@@ -4,8 +4,9 @@ My personal daily-use Neovim setup
 
 ## Dependencies
 
-- Node, Ripgrep
+- Node, Ripgrep(for telescope)
 - Kitty, ImageMagic(for image.nvim)
+- Jupyter related( [molten](https://github.com/benlubas/molten-nvim/blob/main/docs/Not-So-Quick-Start-Guide.md), [jupytext](https://github.com/mwouts/jupytext/blob/main/README.md) )
 
 ## Structure
 
@@ -29,12 +30,14 @@ $HOME/.config/nvim
                 │           ├── colorscheme.lua
                 │           ├── comment.lua
                 │           ├── copilot.lua
+                │           ├── diagram.lua
                 │           ├── dressing.lua
                 │           ├── formatting.lua
                 │           ├── gitsigns.lua
-                │           ├── image-viewer.lua
+                │           ├── image.lua
                 │           ├── indent-blankline.lua
                 │           ├── init.lua
+                │           ├── jupyter.lua
                 │           ├── lazygit.lua
                 │           ├── linting.lua
                 │           ├── lsp
