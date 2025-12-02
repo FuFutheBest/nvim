@@ -5,10 +5,11 @@ return {
     config = true,
     -- Depending on your nvim distro or config you may need to make the loading not lazy
     lazy = false,
-    enable = true,
+    enable = false, -- locked for now
   },
   {
     "benlubas/molten-nvim",
+    enable = false, -- locked for now
     version = "^1.0.0", -- use version <2.0.0 to avoid breaking changes
     dependencies = { "3rd/image.nvim" },
     build = ":UpdateRemotePlugins",

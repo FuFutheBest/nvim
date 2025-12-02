@@ -61,4 +61,4 @@ $HOME/.config/nvim
 ## References
 
 - [Overall setup](https://www.josean.com/posts/how-to-setup-neovim-2024)
-- [Chinese guide](https://github.com/archibate/vimrc)
+- [Chinese sample](https://github.com/archibate/vimrc)
