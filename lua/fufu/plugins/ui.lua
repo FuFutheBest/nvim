@@ -1,5 +1,4 @@
 return {
-
   -- Theme
   {
     "catppuccin/nvim",
@@ -9,7 +8,7 @@ return {
 
     opts = {
       flavour = "mocha", -- latte, frappe, macchiato, mocha
-      transparent_background = false,
+      transparent_background = true,
       auto_integrations = true,
     },
 

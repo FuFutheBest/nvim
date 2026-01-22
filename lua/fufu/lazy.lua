@@ -24,14 +24,32 @@ vim.g.maplocalleader = "\\"
 -- Setup lazy.nvim
 require("lazy").setup({
   spec = {
+    {
+      "mason-org/mason.nvim",
+      opts = {
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+          },
+        },
+      },
+    },
+    {
+      "zapling/mason-conform.nvim",
+      dependencies = { "mason-org/mason.nvim", "stevearc/conform.nvim" },
+    },
     -- import your plugins
     { import = "fufu.plugins" },
-    { import = "fufu.plugins.appearance" },
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
+  install = { colorscheme = { "catppuccin-mocha" } },
   -- automatically check for plugin updates
   checker = { enabled = true },
   change_detection = { notify = false },
+  environment = {
+    lua = "lua5.1",
+  },
 })

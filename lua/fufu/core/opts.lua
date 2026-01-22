@@ -30,8 +30,9 @@ opt.autoindent = true -- Copy indent from the current line when starting a new o
 
 -- Line Wrapping
 opt.wrap = true -- Enable line wrapping
+opt.breakindent = true
 opt.linebreak = true
-opt.showbreak = "> "
+opt.showbreak = "↳ "
 
 -- Backspace
 opt.backspace = "indent,eol,start" -- Allow backspacing over indent, end-of-line, and insert-mode start
@@ -61,7 +62,7 @@ opt.splitbelow = true -- When splitting horizontally, place new window to the bo
 
 -- Scrolling & Context
 opt.scrolloff = 8 -- Lines kept above/below the cursor when scrolling vertically
-opt.sidescrolloff = 4 -- Columns kept on the sides when scrolling horizontally
+-- opt.sidescrolloff = 4 -- Columns kept on the sides when scrolling horizontally
 
 -----------------------------------------------------------
 -- Completion & Performance

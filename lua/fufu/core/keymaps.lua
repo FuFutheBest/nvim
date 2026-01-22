@@ -1,8 +1,5 @@
 local keymap = vim.keymap
 
--- Leader key
-vim.g.mapleader = " " -- Set <leader> to Space
-
 ----------------------------------------------------------------------
 -- Insert mode mappings
 ----------------------------------------------------------------------
@@ -86,3 +83,9 @@ keymap.set("v", ">", ">gv", { desc = "Indent right and keep selection" })
 keymap.set("n", "<Tab>", "<cmd>bnext<CR>", { desc = "Go to next buffer" })
 keymap.set("n", "<S-Tab>", "<cmd>bprevious<CR>", { desc = "Go to previous buffer" })
 keymap.set("n", "<leader>c", "<cmd>bd<CR>", { desc = "Close current buffer" })
+
+----------------------------------------------------------------------
+-- Clipboard
+----------------------------------------------------------------------
+---When pasting a selection, keep the text
+keymap.set("x", "p", [["_dP]])
